@@ -3,12 +3,17 @@ package Acme_Realty;
 /**
  *	abstract class Property
  *		String address
+ *		String propertyType
  *		int built
  *		int squareFoot
  *		int numRooms
  *		double numBath
+ *		double backyard
  *		boolean rentZoning
  *		boolean has_secSystem
+ *		boolean has_pool
+ *		boolean has_fireplace
+ *		double value
  *
  *	The parent class of all properties listed in Acme Realty.
  *	created 10/16/18 - R. Erskine
@@ -34,6 +39,9 @@ public class Property implements Rentable
 	private boolean has_pool;
 	private boolean has_fireplace;
 	
+	//property value
+	private double value;
+	
 	//default constructor
 	public Property()
 	{
@@ -50,6 +58,8 @@ public class Property implements Rentable
 		has_secSystem = false;
 		has_pool = false;
 		has_fireplace = false;
+		
+		value = 0.0;
 	}
 	
 	//all input constructor
@@ -69,6 +79,16 @@ public class Property implements Rentable
 		has_secSystem = sec;
 		has_pool = pool;
 		has_fireplace = fire;
+		
+		value = 0.0;
+	}
+
+	public double getValue() {
+		return value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
 	}
 
 	public String getPropertyType() {
@@ -176,8 +196,15 @@ public class Property implements Rentable
 	public String toString() 
 	{
 		return "" + address + "\n" + propertyType + "\n" + builtIn + "\n" + squareFoot + "\n"
-				+ numRooms + "\n" + numBath + backyard + "\n" + rentZoning + "\n" + has_secSystem + "\n" 
-				+ has_pool + "\n" + has_fireplace + "\n";
+				+ numRooms + "\n" + numBath + "\n" + backyard + "\n" + rentZoning + "\n" + has_secSystem + "\n" 
+				+ has_pool + "\n" + has_fireplace + "\n" + value + "\n";
+	}
+	
+	public String propWrite()
+	{
+		return "" + address + " " + propertyType + " " + builtIn + " " + squareFoot + " "
+				+ numRooms + " " + numBath + " " + backyard + " " + rentZoning + " " + has_secSystem + " " 
+				+ has_pool + " " + has_fireplace + " " + value + " ";
 	}
 
 }
