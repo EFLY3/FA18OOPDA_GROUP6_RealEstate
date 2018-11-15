@@ -12,28 +12,95 @@ package Acme_Realty;
  *
  *	The parent class of all properties listed in Acme Realty.
  *	created 10/16/18 - R. Erskine
+ *	edited 11/15/18 - R.Erskine
  */
-public abstract class Property implements Rentable
+public class Property implements Rentable
 {
 
-	protected String address;
-	protected int builtIn;
-	protected int squareFoot;
-	protected int numRooms;
-	protected double numBath;
-	protected boolean rentZoning;
-	protected boolean has_secSystem;
+	//property Strings
+	private String address;
+	private String propertyType;
+	
+	//property number stats
+	private int builtIn;
+	private int squareFoot;
+	private int numRooms;
+	private double numBath;
+	private double backyard;
+	
+	//property features
+	private boolean rentZoning;
+	private boolean has_secSystem;
+	private boolean has_pool;
+	private boolean has_fireplace;
 	
 	//default constructor
 	public Property()
 	{
 		address = "";
+		propertyType = "";
+		
 		builtIn = 0;
 		squareFoot = 0;
 		numRooms = 0;
 		numBath = 0.0;
-		rentZoning = true;
-		has_secSystem = true;
+		backyard = 0.0;
+		
+		rentZoning = false;
+		has_secSystem = false;
+		has_pool = false;
+		has_fireplace = false;
+	}
+	
+	//all input constructor
+	public Property(String add, String type, int built, int foot, int room, double bath, double yard,
+					boolean zone, boolean sec, boolean pool, boolean fire)
+	{
+		address = add;
+		propertyType = type;
+		
+		builtIn = built;
+		squareFoot = foot;
+		numRooms = room;
+		numBath = bath;
+		backyard = yard;
+		
+		rentZoning = zone;
+		has_secSystem = sec;
+		has_pool = pool;
+		has_fireplace = fire;
+	}
+
+	public String getPropertyType() {
+		return propertyType;
+	}
+
+	public void setPropertyType(String propertyType) {
+		this.propertyType = propertyType;
+	}
+
+	public double getBackyard() {
+		return backyard;
+	}
+
+	public void setBackyard(double backyard) {
+		this.backyard = backyard;
+	}
+
+	public boolean isHas_pool() {
+		return has_pool;
+	}
+
+	public void setHas_pool(boolean has_pool) {
+		this.has_pool = has_pool;
+	}
+
+	public boolean isHas_fireplace() {
+		return has_fireplace;
+	}
+
+	public void setHas_fireplace(boolean has_fireplace) {
+		this.has_fireplace = has_fireplace;
 	}
 
 	//Setters and Getters
@@ -108,8 +175,9 @@ public abstract class Property implements Rentable
 	@Override
 	public String toString() 
 	{
-		return "" + address + "\n" + builtIn + "\n" + squareFoot + "\n"
-				+ numRooms + "\n" + numBath;
+		return "" + address + "\n" + propertyType + "\n" + builtIn + "\n" + squareFoot + "\n"
+				+ numRooms + "\n" + numBath + backyard + "\n" + rentZoning + "\n" + has_secSystem + "\n" 
+				+ has_pool + "\n" + has_fireplace + "\n";
 	}
 
 }
