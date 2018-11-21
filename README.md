@@ -12,6 +12,9 @@ Project Name:
 Project Scenario:
           All customers will be asked whether they are buying or sellingproperty. Depending on their answer...Buyer: Selects what they want the property to contain (accessories, commercial/residential, size, type of house, etc.). Then the agency will show them a list of available properties based on these parameters. Then they buy/rent a property, and the bought/rented propertyis archived on an “archived properties” list.Seller:Puts up a propertyand lists its contents. The contents being the parameters buyers can use to search for properties. An appraiser looks at thepropertyand puts a price on it based on what the property contains. Finally, the house is put up in the database of “to sell” houses.
           
+11/20/18 - Hey guys, I added my Appraiser class to the master and I uploaded my attempt of sellerGUI to a pull. It needs help in that, I can't make the button work to add all the stuff together and print it to a file. I'm not sure where I went wrong with it, but if someone could take a peak that would be great.
+-Rich
+          
 11/15/18 - Hey guys, I remade Property class to basically be all encompasing. It has a default, empty constructor and a constructor that accepts all our variables. It would eliminate the need for all the other crazy subclasses, but keep rentable as an inherent. This should cut down on on confusion and class bloat. 
 
 I also edited the Appraiser class in Denisha's pull as what I thought the class should look like.
