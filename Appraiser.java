@@ -1,9 +1,10 @@
-
+package agency;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import agency.Property;
 
    /** The Appraiser class will assign a value to a home based on it's internal analyzer.
 	 * 
@@ -87,7 +88,7 @@ public class Appraiser {
 	{
 		return propertyValue;
 	}
-		
+	
 	/** 
 	 * Add property to Housing List Database
 	 */  
@@ -99,7 +100,6 @@ public class Appraiser {
 		    writer.append("\n");
 		     
 		    writer.close();
-
 	}
-}
+}		
 
