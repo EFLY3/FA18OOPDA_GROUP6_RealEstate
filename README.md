@@ -24,6 +24,8 @@ I also edited the Appraiser class in Denisha's pull as what I thought the class 
 
 10/27/18 - Divided the GUI into three frames, an opening frame that asks if a user is buying or selling, a frame for buyers and a frame for sellers. It's stored in branch guiTake2 -Emily 
 
+10/22/18 - I uploaded the Realtor and Appraiser classes along with some ideas to develop the more complicated methods -Denisha
+
 10/22/18 - I uploaded a sort of "skeleton" for the GUI in a branch "guiTake1". Contact me if you have any questions or ideas - Emily
 
 10/22/18 - I uploaded the .java version of the Propery classes and added the cover page to our readme file. - Rich
