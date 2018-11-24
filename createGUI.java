@@ -34,8 +34,8 @@ public class createGUI extends JFrame{
 	
 	public void createBuyerGUI()
 	{
-		buyerGUI buyer = new buyerGUI();
-		buyer.makeBuyerGUI();
+		//buyerGUI buyer = new buyerGUI();
+		//buyer.makeBuyerGUI();
 		this.setVisible(false);
 	}
 	public void createSellerGUI()
