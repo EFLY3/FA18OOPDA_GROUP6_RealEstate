@@ -94,9 +94,8 @@ public class Appraiser {
 	public void addPropertyToDatabase(Property prop) 
 			throws IOException {
 		
-		    BufferedWriter writer = new BufferedWriter(new FileWriter("PropertyList.txt"));
-		    writer.append(prop.propWrite());
-		    writer.append("\n");
+		    BufferedWriter writer = new BufferedWriter(new FileWriter("PropertyList.txt", true));
+		    writer.write(prop.propWrite() + System.getProperty("line.separator"));
 		     
 		    writer.close();
 
