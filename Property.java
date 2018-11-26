@@ -1,4 +1,3 @@
-package Acme_Realty;
 
 /**
  *	abstract class Property
@@ -13,6 +12,7 @@ package Acme_Realty;
  *		boolean has_secSystem
  *		boolean has_pool
  *		boolean has_fireplace
+ *		boolean has_garage
  *		double value
  *
  *	The parent class of all properties listed in Acme Realty.
@@ -23,24 +23,25 @@ public class Property implements Rentable
 {
 
 	//property Strings
-	private String address;
-	private String propertyType;
+	protected String address;
+	protected String propertyType;
 	
 	//property number stats
-	private int builtIn;
-	private int squareFoot;
-	private int numRooms;
-	private double numBath;
-	private double backyard;
+	protected int builtIn;
+	protected int squareFoot;
+	protected int numRooms;
+	protected double numBath;
+	protected double backyard;
 	
 	//property features
-	private boolean rentZoning;
-	private boolean has_secSystem;
-	private boolean has_pool;
-	private boolean has_fireplace;
+	protected boolean rentZoning;
+	protected boolean has_secSystem;
+	protected boolean has_pool;
+	protected boolean has_fireplace;
+	protected boolean has_garage;
 	
 	//property value
-	private double value;
+	protected double value;
 	
 	//default constructor
 	public Property()
@@ -58,13 +59,14 @@ public class Property implements Rentable
 		has_secSystem = false;
 		has_pool = false;
 		has_fireplace = false;
+		has_garage = false;
 		
 		value = 0.0;
 	}
 	
 	//all input constructor
 	public Property(String add, String type, int built, int foot, int room, double bath, double yard,
-					boolean zone, boolean sec, boolean pool, boolean fire)
+					boolean zone, boolean sec, boolean pool, boolean fire, boolean gara)
 	{
 		address = add;
 		propertyType = type;
@@ -79,8 +81,17 @@ public class Property implements Rentable
 		has_secSystem = sec;
 		has_pool = pool;
 		has_fireplace = fire;
+		has_garage = gara;
 		
 		value = 0.0;
+	}
+
+	public boolean getGarage() {
+		return has_garage;
+	}
+
+	public void setGarage(boolean has_garage) {
+		this.has_garage = has_garage;
 	}
 
 	public double getValue() {
