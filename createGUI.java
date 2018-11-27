@@ -1,9 +1,15 @@
+package agency;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class createGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
-	JTextArea question;
+	JPanel askUser;
+	JLabel question;
 	JButton buyerButton, sellerButton;
 	
 	public createGUI()
@@ -13,20 +19,23 @@ public class createGUI extends JFrame{
 	}
 	public void makeQuestionFrame()
 	{
+		this.setLayout(new BorderLayout());
 		setTitle("Buyer or Seller");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		question = new JTextArea();
-		question.setText("Are you buying or selling?");
+		question = new JLabel("Are you buying or selling?");
 		buyerButton = new JButton("Buying");
 		buyerButton.addActionListener(e -> createBuyerGUI());
 		sellerButton = new JButton("Selling");
 		sellerButton.addActionListener(e -> createSellerGUI());
 		
-		this.add(question);
-		this.add(buyerButton);
-		this.add(sellerButton);
+		askUser = new JPanel(new FlowLayout());
+		askUser.add(question);
+		askUser.add(buyerButton);
+		askUser.add(sellerButton);
 		
+		this.getContentPane().add(askUser, BorderLayout.CENTER);
+		((JComponent) this.getContentPane()).setBorder(new EmptyBorder( 5, 5, 5, 5));
 		
 		pack();
 		setVisible(true);
@@ -43,5 +52,9 @@ public class createGUI extends JFrame{
 		sellerGUI seller = new sellerGUI();
 		seller.makeSellerGUI();
 		this.setVisible(false);
+	}
+	
+	public static void main(String[] args) {
+		new createGUI();
 	}
 }
