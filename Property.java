@@ -30,6 +30,7 @@ public class Property implements Rentable
 	protected int builtIn;
 	protected int squareFoot;
 	protected int numRooms;
+	protected int numFloors;
 	protected double numBath;
 	protected double backyard;
 	
@@ -43,6 +44,8 @@ public class Property implements Rentable
 	//property value
 	protected double value;
 	
+	protected boolean purchased;
+	
 	//default constructor
 	public Property()
 	{
@@ -52,6 +55,7 @@ public class Property implements Rentable
 		builtIn = 0;
 		squareFoot = 0;
 		numRooms = 0;
+		numFloors = 0;
 		numBath = 0.0;
 		backyard = 0.0;
 		
@@ -61,11 +65,13 @@ public class Property implements Rentable
 		has_fireplace = false;
 		has_garage = false;
 		
+		purchased = false;
+		
 		value = 0.0;
 	}
 	
 	//all input constructor
-	public Property(String add, String type, int built, int foot, int room, double bath, double yard,
+	public Property(String add, String type, int built, int foot, int room, double bath, int floor, double yard,
 					boolean zone, boolean sec, boolean pool, boolean fire, boolean gara)
 	{
 		address = add;
@@ -74,6 +80,7 @@ public class Property implements Rentable
 		builtIn = built;
 		squareFoot = foot;
 		numRooms = room;
+		numFloors = floor;
 		numBath = bath;
 		backyard = yard;
 		
@@ -83,10 +90,32 @@ public class Property implements Rentable
 		has_fireplace = fire;
 		has_garage = gara;
 		
+		purchased = false;
+		
 		value = 0.0;
 	}
+	
+	public boolean getPurchased()
+	{
+		return purchased;
+	}
+	
+	public void setPurchased(boolean pur)
+	{
+		purchased = pur;
+	}
+	
+	public int getFloors()
+	{
+		return numFloors;
+	}
+	
+	public void setFloors(int floor)
+	{
+		numFloors = floor;
+	}
 
-	public boolean getGarage() {
+	public boolean isHas_garage() {
 		return has_garage;
 	}
 
