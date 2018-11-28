@@ -1,4 +1,3 @@
-package Acme_Realty;
 
 /**
  *	interface Rentable
