@@ -1,4 +1,8 @@
+package Agency;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -7,10 +11,8 @@ import javax.swing.*;
 public class buyerGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	File f1 = new File("propertiesforsale.dat");
-	File f2 = new File("soldproperties.dat");
-	ObjectInputStream is;
-	ObjectOutputStream os;
+	File f1 = new File("SoldProperties.txt"); // Save property bought by user in GUI
+	File f2 = new File("Test.txt"); // Listing of all properties on sale
 
 	JPanel searchSortPanel, criteriaPanel, buttonPanel, searchResultsPanel;
 	JButton filterSearchButton;
@@ -20,108 +22,92 @@ public class buyerGUI extends JFrame {
 	JList<ArrayList<JPanel>> propertyList;
 	JScrollPane listScroll, boxScroll;
 	JComboBox<String> typeSelect;
-	JTextField roomInput, squareFeetInput, garageInput, unitsInput, bathsInput, backyardInput, verandaInput, floorInput;
-	JRadioButton rentableButton, secSystemButton, parkingButton, poolButton, fireplaceButton; // there's probably a
-	JLabel roomLabel, squareFeetLabel, garageLabel, unitsLabel, bathsLabel, backyardLabel, verandaLabel, floorLabel;																					// better button for
-																								// residential/commercial
-	boolean rentable, hasSecurity, hasParking, hasPool, hasFireplace;
-	int numRooms, squareFeet, numGarage, numUnits, floorAmt;
-	double numBaths, backyard, verandaSize;
-	String propertyType;
+	JTextField builtInput, squareFeetInput, roomInput, bathInput, backyardInput;
+	JRadioButton rentableButton, secSystemButton, poolButton, fireplaceButton;
+	JLabel builtLabel, squareFeetLabel, roomLabel, bathLabel, backyardLabel;
+
+	private boolean rentable, hasSecurity, hasPool, hasFireplace;
+	private int builtIn, squareFeet, numRooms;
+	private double numBaths, backyard;
+	private String propertyType;
+	private Property propertySpecs;
+	private Property selectedProp;
+	private JList<Property> simProp;
 
 	public buyerGUI() {
 		super("buyerGUI");
-		makeBuyerGUI();
 	}
 
 	public void makeBuyerGUI() {
 		searchSortPanel = new JPanel();
 		criteriaPanel = new JPanel();
-		//buttonPanel = new JPanel();
 		searchResultsPanel = new JPanel();
 		purchaseOrRentConfirm = new JOptionPane();
-		
+
 		listOfProperties = new ArrayList<>();
 		listOfPropertiesText = new ArrayList<>();
-		
+
 		propertyList = new JList<>();
-		
+
 		listScroll = new JScrollPane(propertyList);
 		boxScroll = new JScrollPane(typeSelect);
-		
+
 		typeSelect = new JComboBox<>();
 
-		//Label to put questions for user
-		roomLabel = new JLabel("How many rooms?: ");
+		// Label to put questions for user
+		builtLabel = new JLabel("Year of construction: ");
 		squareFeetLabel = new JLabel("How many square feet?: ");
-		garageLabel = new JLabel("How many garages?: ");
-		unitsLabel = new JLabel("How many units do you want?: ");
-		bathsLabel = new JLabel("How many bathrooms?: ");
+		roomLabel = new JLabel("How many rooms?: ");
+		bathLabel = new JLabel("How many bathrooms?: ");
 		backyardLabel = new JLabel("How big a backyard?: ");
-		verandaLabel = new JLabel("How big a verdana?: ");
-		floorLabel = new JLabel("How many floors?: ");
-		
+
 		// TextFields to store values from questions
-		roomInput = new JTextField();
+		builtInput = new JTextField();
 		squareFeetInput = new JTextField();
-		garageInput = new JTextField();
-		unitsInput = new JTextField();
-		bathsInput = new JTextField();
+		roomInput = new JTextField();
+		bathInput = new JTextField();
 		backyardInput = new JTextField();
-		verandaInput = new JTextField();
-		floorInput = new JTextField();
-		poolButton = new JRadioButton();
-		fireplaceButton = new JRadioButton();
-		secSystemButton = new JRadioButton();
-		rentableButton = new JRadioButton();
-		parkingButton = new JRadioButton();
-		filterSearchButton = new JButton();
-		
+
+		// Radio buttons for boolean values
+		rentableButton = new JRadioButton("Would you like a rentable property?: ");
+		secSystemButton = new JRadioButton("Would you like a security system?: ");
 		poolButton = new JRadioButton("Would you like a pool?: ");
 		fireplaceButton = new JRadioButton("Would you like a fireplace?: ");
-		secSystemButton = new JRadioButton("Would you like a security system?: ");
-		rentableButton = new JRadioButton("Would you like a rentable property?: ");
-		parkingButton = new JRadioButton("Would you like parking on location?: ");
-		filterSearchButton = new JButton("Click to Refresh Results");
-		
-		rentable = hasSecurity = hasParking = hasPool = hasFireplace = false;
-		numRooms = squareFeet = numGarage = numUnits = floorAmt = 0;
-		numBaths = backyard = verandaSize = 0.0;
 
-		/**
-		 * It's printing the panels twice, please take a look at it.
-		 */
+		filterSearchButton = new JButton("Click to Refresh Results");
+
+		// Set fields to default values
+		rentable = hasSecurity = hasPool = hasFireplace = false;
+		builtIn = squareFeet = numRooms = 0;
+		numBaths = backyard = 0.0;
+
+		// Create frame layout
 		this.setTitle("Search Properties");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new GridLayout(1, 1));
-		
+		// Panel to let the user select property features
 		this.add(searchSortPanel);
-			searchSortPanel.setLayout(new BorderLayout());
-			searchSortPanel.add(criteriaPanel, BorderLayout.CENTER);
-				criteriaPanel.setLayout(new GridLayout(0, 1)); 
-				criteriaPanel.add(squareFeetLabel);  
-				criteriaPanel.add(squareFeetInput);
-				criteriaPanel.add(floorLabel);		 
-				criteriaPanel.add(floorInput);
-				criteriaPanel.add(bathsLabel); 		 
-				criteriaPanel.add(bathsInput);
-				criteriaPanel.add(garageLabel);		 
-				criteriaPanel.add(garageInput);
-				criteriaPanel.add(backyardLabel);	 
-				criteriaPanel.add(backyardInput);	
-				criteriaPanel.add(rentableButton);	 
-				criteriaPanel.add(secSystemButton);	 
-				criteriaPanel.add(parkingButton);	 
-				criteriaPanel.add(new JLabel("  "));
-				criteriaPanel.add(new JLabel("Select property type:"));  
-				criteriaPanel.add(typeSelect);
-
-		this.add(searchResultsPanel);
-			searchResultsPanel.setLayout(new BorderLayout());
-			searchResultsPanel.add(listScroll, BorderLayout.CENTER);
-			searchResultsPanel.add(filterSearchButton, BorderLayout.SOUTH);
-			filterSearchButton.addActionListener(e -> filterList());
-
+		searchSortPanel.setLayout(new BorderLayout());
+		searchSortPanel.add(criteriaPanel, BorderLayout.CENTER);
+		criteriaPanel.setLayout(new GridLayout(0, 1));
+		criteriaPanel.add(builtLabel);
+		criteriaPanel.add(builtInput);
+		criteriaPanel.add(squareFeetLabel);
+		criteriaPanel.add(squareFeetInput);
+		criteriaPanel.add(roomLabel);
+		criteriaPanel.add(roomInput);
+		criteriaPanel.add(bathLabel);
+		criteriaPanel.add(bathInput);
+		criteriaPanel.add(backyardLabel);
+		criteriaPanel.add(backyardInput);
+		criteriaPanel.add(rentableButton);
+		criteriaPanel.add(secSystemButton);
+		criteriaPanel.add(poolButton);
+		criteriaPanel.add(fireplaceButton);
+		criteriaPanel.add(new JLabel("  "));
+		criteriaPanel.add(new JLabel("Select property type:"));
+		criteriaPanel.add(typeSelect);
+		// Add property types to JComboBox
 		typeSelect.addItem("Apartment");
 		typeSelect.addItem("Apartment Building");
 		typeSelect.addItem("Bungalow");
@@ -131,46 +117,36 @@ public class buyerGUI extends JFrame {
 		typeSelect.addItem("Ranch");
 		typeSelect.addItem("TownHouse");
 		typeSelect.addItem("Victorian");
-		typeSelect.addActionListener(e -> filterSearch());
-		
+		typeSelect.addActionListener(e -> makeFilteredList());
+
+		// Panel to display properties on sale that match user's selected features
+		this.add(searchResultsPanel);
+		searchResultsPanel.setLayout(new BorderLayout());
+		searchResultsPanel.add(listScroll, BorderLayout.CENTER);
+		searchResultsPanel.add(filterSearchButton, BorderLayout.SOUTH);
+		filterSearchButton.addActionListener(e -> filterSearch());
+
 		pack();
 		setVisible(true);
 	}
 
+	/**
+	 * Retrieve input from user, change to primitive types and save in fields
+	 */
 	public void filterSearch() {
-		if (typeSelect.getSelectedItem() == "Apartment Building") {
-			criteriaPanel.add(unitsInput);
-		} else {
-			criteriaPanel.add(roomInput);
-		}
-		if (typeSelect.getSelectedItem() == "Apartment" || typeSelect.getSelectedItem() == "Apartment Building") {
-			criteriaPanel.add(parkingButton);
-		}
-		if (typeSelect.getSelectedItem() == "Bungalow") {
-			criteriaPanel.add(verandaInput);
-		}
-	}
 
-	public void filterList() // reads input from searchPanel, filters items in List of Properties for Sale by
-							// matching input, and displays them on listPane
-	{
-		propertyType = (String) typeSelect.getSelectedItem();
-		numRooms = Integer.parseInt(roomInput.getText());
-		// floorAmt = Integer.parseInt(floorInput.getText());
-		// numGarage = Integer.parseInt(garageInput.getText());
-		// numUnits = Integer.parseInt(unitsInput.getText());
+		builtIn = Integer.parseInt(builtInput.getText());
 		squareFeet = Integer.parseInt(squareFeetInput.getText());
-		numBaths = Double.parseDouble(bathsInput.getText());
+		numRooms = Integer.parseInt(roomInput.getText());
+		numBaths = Double.parseDouble(bathInput.getText());
 		backyard = Double.parseDouble(backyardInput.getText());
-		// verandaSize = Double.parseDouble(verandaInput.getText());
+		propertyType = (String) typeSelect.getSelectedItem();
+
 		if (rentableButton.isSelected()) {
 			rentable = true;
 		}
 		if (secSystemButton.isSelected()) {
 			hasSecurity = true;
-		}
-		if (parkingButton.isSelected()) {
-			hasParking = true;
 		}
 		if (poolButton.isSelected()) {
 			hasPool = true;
@@ -178,55 +154,72 @@ public class buyerGUI extends JFrame {
 		if (fireplaceButton.isSelected()) {
 			hasFireplace = true;
 		}
-		
-		Realtor r = new Realtor();
-		listOfProperties = r.getListing();
-		
-		for (Property comp : listOfProperties) {
-			if (comp.getNumRooms() == numRooms && comp.getSquareFoot() == squareFeet && comp.getNumBath() == numBaths
-					&& comp.getBackyard() == backyard && comp.isHas_fireplace() == hasFireplace
-					&& comp.isHas_pool() == hasPool && comp.getPropertyType() == propertyType) {
-
-				JTextArea info = new JTextArea();
-				JButton purchase = new JButton("Purchase");
-				info.setText(comp.propWrite());
-				
-				JPanel p = new JPanel();
-				p.add(info);
-				p.add(purchase);
-				listOfPropertiesText.add(p);
-				
-				//listOfPropertiesText[j].add(purchase);
-				purchase.addActionListener(e -> makePurchase(comp));
-			}
-		}
-		while (true) {
-			try {
-				is = new ObjectInputStream(new FileInputStream(f1));
-				Property comp = (Property) is.readObject();
-				listOfProperties.add(comp);
-			
-			} catch (IOException | ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-
-		
 	}
 
-	public void makePurchase(Property prop) {
-		try {
+	/**
+	 * Make a property object using data saved in fields
+	 */
+	public void makeProperty() {
 
-			os = new ObjectOutputStream(new FileOutputStream(f2));
+		propertySpecs = new Property();
+		propertySpecs.setPropertyType(propertyType);
+		propertySpecs.setBuiltIn(builtIn);
+		propertySpecs.setSquareFoot(squareFeet);
+		propertySpecs.setNumRooms(numRooms);
+		propertySpecs.setNumBath(numBaths);
+		propertySpecs.setBackyard(backyard);
+		propertySpecs.setRentZoning(rentable);
+		propertySpecs.setHas_secSystem(hasSecurity);
+		propertySpecs.setHas_pool(hasPool);
+		propertySpecs.setHas_fireplace(hasFireplace);
 
-			prop.setPurchased(true);
-			os.writeObject(prop);
+		// Here are all the values that are being passed
+		System.out.println("address: " + propertySpecs.getAddress());
+		System.out.println(propertySpecs.propWrite());
+	}
 
-			os.close();
-			JOptionPane.showMessageDialog(null, "Congradulations! You just bought a property!");
+	/**
+	 * Return the property created using data saved in fields
+	 */
+	public Property getUserPropertySpecs() {
+		return propertySpecs;
+	}
+
+	/**
+	 * Make a property object using data saved in fields
+	 */
+	public void makeFilteredList() {
+
+		DefaultListModel<Property> list = new DefaultListModel<>();
+		JButton purchase = new JButton("Purchase");
+
+		Realtor seller = new Realtor();
+		listOfProperties = seller.propertyMatched();
+		for (Property comp : listOfProperties) {
+			list.addElement(comp);
+			simProp = new JList<>(list);
 		}
 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		simProp.setBounds(100, 100, 75, 75);
+		listScroll.add(simProp);
+		listScroll.add(purchase);
+		purchase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (simProp.getSelectedIndex() != -1) {
+					selectedProp = simProp.getSelectedValue();
+				}
+			}
+		});
+	}
+
+	public void makePurchase() throws IOException {
+
+		Realtor r = new Realtor();
+		r.saveSoldProperty(selectedProp);
+
+		JOptionPane.showMessageDialog(null, "Congrats! You just bought a property!");
+
+		System.exit(0);
+	}
 }
