@@ -187,12 +187,12 @@ public void makeProperty()
 			//Here are all the values that are being passed (all are still 0 and null)
 			System.out.println(toSell.propWrite());
 
+			// Pass property to Appraiser to save
+			Appraiser a = new Appraiser();
 			try {
-				acme.addPropertyToDatabase(toSell);
-				
-
-			} catch (IOException e1) {
-				e1.printStackTrace();
+				a.addPropertyToDatabase(toSell);
+			}catch (IOException e) {
+				e.printStackTrace();
 			}
 			
 			DecimalFormat dollar = new DecimalFormat("0.00");
