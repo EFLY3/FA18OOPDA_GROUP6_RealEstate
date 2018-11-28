@@ -88,17 +88,13 @@ public class Appraiser {
 		return propertyValue;
 	}
 		
-	/** 
+	/**
 	 * Add property to Housing List Database
-	 */  
-	public void addPropertyToDatabase(Property prop) 
-			throws IOException {
-		
-		    BufferedWriter writer = new BufferedWriter(new FileWriter("PropertyList.txt", true));
-		    writer.write(prop.propWrite() + System.getProperty("line.separator"));
-		     
-		    writer.close();
+	 * @throws IOException 
+	 */
+	public void addPropertyToDatabase(Property prop) throws IOException {
 
+			FileHandler file = new FileHandler();
+			file.writeFile(prop, f1);
 	}
 }
-
