@@ -1,7 +1,6 @@
-package agency;
+package Agency;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,9 +11,10 @@ import java.util.ArrayList;
 public class Realtor {
 
 	private Property propertySpecs; // Specifications of the seller's property
-	private Property propertySold; // Property selected and bought by user from similarProperties' list.
 	private ArrayList<Property> similarProperties; // Properties matching the specifications
 	private ArrayList<Property> listing; // All the properties on sale
+	private File f1 = new File("ArchiveOfPropertiesSold.txt");
+
 	/**
 	 * constructor to receive the specifications of the property that user wants to buy.
 	 */
@@ -27,19 +27,21 @@ public class Realtor {
 	/**
 	 * Retrieves properties saved in text file and puts them in an ArrayList to be sorted
 	 * later in compareProperties() 
+	 * @throws IOException 
 	 */
-	public ArrayList<Property> getListing(){
-		
-		FileReader f = new FileReader();
-		listing.addAll(f.getPropertiesToBeSold("PropertiesForSale.xlsx"));
-		
+	public ArrayList<Property> getListing() throws IOException{
+
+		FileHandler propList = new FileHandler();
+		propList.retrievePropertyObject(new File ("Test.txt"));
+		listing = propList.returnProperties();
+
 		return listing;
 	}
-	
+
 	/**
 	 * Compare properties for sale in HouseListing to the buyer's specifications
 	 */
-	public void compareProperties() {
+	public void compareProperties(Property specs) {
 		/**
 		 * Sorting of files could be made from this class
 		 * 
@@ -50,18 +52,21 @@ public class Realtor {
 		 * be added
 		 */
 		for (Property p : listing) {
-			if (propertySpecs.getBuiltIn() == p.getBuiltIn()
-					&& propertySpecs.getPropertyType().equals(p.getPropertyType())
-					&& propertySpecs.getFloors() == p.getFloors() && propertySpecs.getNumBath() == p.getNumBath()
-					&& propertySpecs.getNumRooms() == p.getNumBath()
-					&& propertySpecs.getSquareFoot() == p.getSquareFoot()
-					&& propertySpecs.isRentZoning() == p.isRentZoning()
-					&& propertySpecs.isHas_fireplace() == p.isHas_fireplace()
-					&& propertySpecs.isHas_garage() == p.isHas_garage() && propertySpecs.isHas_pool() == p.isHas_pool()
-					&& propertySpecs.isHas_secSystem() == p.isHas_secSystem()
-					&& propertySpecs.getBackyard() < p.getBackyard() && propertySpecs.getValue() < p.getValue())
 
-				similarProperties.add(p);
+			buyerGUI b = new buyerGUI();
+			propertySpecs = b.getUserPropertySpecs();
+			if (propertySpecs.getPropertyType().equals(p.getPropertyType())
+					&& propertySpecs.getBuiltIn() == p.getBuiltIn()
+					&& propertySpecs.getSquareFoot() == p.getSquareFoot()
+					&& propertySpecs.getNumRooms() == p.getNumRooms()
+					&& propertySpecs.getNumBath() == p.getNumBath()
+					&& propertySpecs.getBackyard() <= p.getBackyard() 
+					&& propertySpecs.isRentZoning() == p.isRentZoning()
+					&& propertySpecs.isHas_secSystem() == p.isHas_secSystem()
+					&& propertySpecs.isHas_pool() == p.isHas_pool()
+					&& propertySpecs.isHas_fireplace() == p.isHas_fireplace())
+
+				similarProperties.add(p); // Add matching property to an ArrayList
 		}
 	}
 
@@ -72,25 +77,23 @@ public class Realtor {
 		return similarProperties;
 	}
 
-	/**
-	 * After user selects a property from similarProperties and buys it, get that Sproperty back
-	 */
-	public void getPropertySold(Property propertySold) {
-		this.propertySold = propertySold;
-	}
-	
+
 	/**
 	 * Save sold property in ArchivedProperties
 	 */
-	public void saveSoldProperty() throws IOException {
+	public void saveSoldProperty(Property prop) throws IOException {
 
 		/**
 		 * Data could be stored in an Excel workbook, exceptions could be added here to
 		 * handle problems with the file creation
 		 */
-		BufferedWriter writer = new BufferedWriter(new FileWriter("ArchiveOfPropertiesSold.txt"));
-		writer.append(propertySold.propWrite());
-		writer.append("\n");
-		writer.close();
+		try {
+			FileHandler saveProp = new FileHandler();
+			saveProp.writeFile(prop, f1);
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
 	}
 }
