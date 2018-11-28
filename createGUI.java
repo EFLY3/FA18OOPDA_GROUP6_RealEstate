@@ -1,5 +1,8 @@
-package agency;
-
+/**
+ *		createGUI
+ *	launching pad for the Realty program
+ *	asks one question to deside which direction you will gp
+ */
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.*;

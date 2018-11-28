@@ -1,0 +1,2 @@
+210 Jacobson St. Morristown, NJ 21090 Colonial 1986 2400 5 2.5 0.5 false true true true 412000.0 
+401 Nothing Road Void, NJ 08034 Condo 2010 750 2 2.0 0.05 false true false false 128000.0 

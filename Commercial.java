@@ -1,4 +1,12 @@
 
+
+/**
+ *		Commercial
+ *	subclass of Property
+ *	contains the classification Commercial designator
+ *
+ *	created by R.Erskine 11/20/18
+ */
 public class Commercial extends Property
 {
 	final private String CLASSIFICATION = "Commercial";

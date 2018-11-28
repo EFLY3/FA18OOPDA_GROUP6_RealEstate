@@ -1,4 +1,10 @@
-
+/**
+ *		Residential
+ *	subclass of Property
+ *	contains the classification Residential designator
+ *
+ *	created by R.Erskine 11/20/18
+ */
 public class Residential extends Property
 {
 	final private String CLASSIFICATION = "Residential";

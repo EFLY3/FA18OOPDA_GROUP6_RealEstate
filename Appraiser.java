@@ -1,6 +1,7 @@
 
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 		 * -other features such as security systems, pools and fireplaces.
 	 *
 	 * - edited by R.Erskine 11/15/18
+	 * - edited by R.Erskine 11/28/18
 	 */
 public class Appraiser { 
 	
@@ -26,6 +28,8 @@ public class Appraiser {
 	
 	//the house costs
 	private double propertyValue;
+	
+	private File f1 = new File("propList.txt");
 	
 	/** 
 	 * default constructor

@@ -1,4 +1,3 @@
-package Agency;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class Realtor {
 	public ArrayList<Property> getListing() throws IOException{
 
 		FileHandler propList = new FileHandler();
-		propList.retrievePropertyObject(new File ("Test.txt"));
+		propList.retrievePropertyObject(new File ("propList.txt"));
 		listing = propList.returnProperties();
 
 		return listing;

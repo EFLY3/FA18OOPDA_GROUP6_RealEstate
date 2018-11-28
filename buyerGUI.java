@@ -1,4 +1,3 @@
-package Agency;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +11,7 @@ public class buyerGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	File f1 = new File("SoldProperties.txt"); // Save property bought by user in GUI
-	File f2 = new File("Test.txt"); // Listing of all properties on sale
+	File f2 = new File("propList.txt"); // Listing of all properties on sale
 
 	JPanel searchSortPanel, criteriaPanel, buttonPanel, searchResultsPanel;
 	JButton filterSearchButton;
@@ -23,10 +22,13 @@ public class buyerGUI extends JFrame {
 	JScrollPane listScroll, boxScroll;
 	JComboBox<String> typeSelect;
 	JTextField builtInput, squareFeetInput, roomInput, bathInput, backyardInput;
-	JRadioButton rentableButton, secSystemButton, poolButton, fireplaceButton;
+	JRadioButton garageButton, secSystemButton, poolButton, fireplaceButton;
 	JLabel builtLabel, squareFeetLabel, roomLabel, bathLabel, backyardLabel;
+	
+	JButton test;
+	JButton apply;
 
-	private boolean rentable, hasSecurity, hasPool, hasFireplace;
+	private boolean hasGarage, hasSecurity, hasPool, hasFireplace;
 	private int builtIn, squareFeet, numRooms;
 	private double numBaths, backyard;
 	private String propertyType;
@@ -69,7 +71,7 @@ public class buyerGUI extends JFrame {
 		backyardInput = new JTextField();
 
 		// Radio buttons for boolean values
-		rentableButton = new JRadioButton("Would you like a rentable property?: ");
+		garageButton = new JRadioButton("Would you like a garage?: ");
 		secSystemButton = new JRadioButton("Would you like a security system?: ");
 		poolButton = new JRadioButton("Would you like a pool?: ");
 		fireplaceButton = new JRadioButton("Would you like a fireplace?: ");
@@ -77,7 +79,7 @@ public class buyerGUI extends JFrame {
 		filterSearchButton = new JButton("Click to Refresh Results");
 
 		// Set fields to default values
-		rentable = hasSecurity = hasPool = hasFireplace = false;
+		hasGarage = hasSecurity = hasPool = hasFireplace = false;
 		builtIn = squareFeet = numRooms = 0;
 		numBaths = backyard = 0.0;
 
@@ -100,7 +102,7 @@ public class buyerGUI extends JFrame {
 		criteriaPanel.add(bathInput);
 		criteriaPanel.add(backyardLabel);
 		criteriaPanel.add(backyardInput);
-		criteriaPanel.add(rentableButton);
+		criteriaPanel.add(garageButton);
 		criteriaPanel.add(secSystemButton);
 		criteriaPanel.add(poolButton);
 		criteriaPanel.add(fireplaceButton);
@@ -109,15 +111,22 @@ public class buyerGUI extends JFrame {
 		criteriaPanel.add(typeSelect);
 		// Add property types to JComboBox
 		typeSelect.addItem("Apartment");
-		typeSelect.addItem("Apartment Building");
 		typeSelect.addItem("Bungalow");
 		typeSelect.addItem("Cape Cod");
 		typeSelect.addItem("Colonial");
+		typeSelect.addItem("Commercial");
 		typeSelect.addItem("Condo");
 		typeSelect.addItem("Ranch");
 		typeSelect.addItem("TownHouse");
 		typeSelect.addItem("Victorian");
-		typeSelect.addActionListener(e -> makeFilteredList());
+		
+		test = new JButton("Test");
+		test.addActionListener(e -> makeProperty());
+		criteriaPanel.add(test);
+		
+		apply = new JButton("Apply");
+		apply.addActionListener(e -> makeFilteredList());
+		criteriaPanel.add(apply);
 
 		// Panel to display properties on sale that match user's selected features
 		this.add(searchResultsPanel);
@@ -142,8 +151,8 @@ public class buyerGUI extends JFrame {
 		backyard = Double.parseDouble(backyardInput.getText());
 		propertyType = (String) typeSelect.getSelectedItem();
 
-		if (rentableButton.isSelected()) {
-			rentable = true;
+		if (garageButton.isSelected()) {
+			hasGarage = true;
 		}
 		if (secSystemButton.isSelected()) {
 			hasSecurity = true;
@@ -168,7 +177,7 @@ public class buyerGUI extends JFrame {
 		propertySpecs.setNumRooms(numRooms);
 		propertySpecs.setNumBath(numBaths);
 		propertySpecs.setBackyard(backyard);
-		propertySpecs.setRentZoning(rentable);
+		propertySpecs.setRentZoning(hasGarage);
 		propertySpecs.setHas_secSystem(hasSecurity);
 		propertySpecs.setHas_pool(hasPool);
 		propertySpecs.setHas_fireplace(hasFireplace);
