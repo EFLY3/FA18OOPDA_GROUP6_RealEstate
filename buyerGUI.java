@@ -229,5 +229,4 @@ public class buyerGUI extends JFrame {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
 }
