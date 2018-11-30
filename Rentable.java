@@ -1,11 +1,10 @@
 
 /**
  *	interface Rentable
- *		sends the method rentable()
+ *	sends the method rentable()
  *
- *created 10/17/18 - R.Erskine
+ * 	@author R.Erskine
  */
-public interface Rentable 
-{
+public interface Rentable {
 	boolean rentable();
 }
