@@ -1,0 +1,5 @@
+Greenwood,_SC_29646 Apartment 1976 22544 4 3.0 167.0 true true true true 0.0 
+75_Summit_St.  Apartment 1970 18000 1 1.0 400.0 true true true true 0.0 
+75_Summit_St.  Apartment 1970 18000 1 1.0 400.0 true true true true 0.0 
+75_Summit_St.  Apartment 1970 18000 1 1.0 400.0 true true true true true 0.0 
+75_Summit_St.  Apartment 1970 18000 1 1.0 400.0 true true true true true 0.0 

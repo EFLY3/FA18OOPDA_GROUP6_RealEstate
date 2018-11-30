@@ -1,0 +1,27 @@
+Address			Property Type	Built In 	Square Foot	Rooms	Baths	Backyard	Zoning	Security	Pool	Fireplace	Garage		Price
+75_Summit_St. 		Apartment	1970		18000		1	1	400		yes	yes		yes	yes		yes		100000
+Sylvania,_OH_43560	Apartment	1972		19500		1	1	500		yes	yes		yes	yes		yes		741852	
+51_Hillside_Street 	Apartment	1974		20665		3	2	200		yes	yes		yes	yes	 	yes		753964
+Greenwood,_SC_29646	Apartment	1976		22544		4	3	167		yes	yes		yes	yes		yes		789451
+601_Campfire_Ave. 	Colonial	1978		15000		1	1	67		no 	no		no 	yes		yes		963851	
+Hamtramck,_MI_48212	Commercial	1980		50078		30	35	33		yes	no		no	no		no		741789
+351_Wild_Horse_Dr. 	Condo		1982		12004		2	1.5	133		no 	yes		yes	no	 	yes		741389
+Indianapolis,_IN_46201	Ranch		1984		39008		9	10	250		yes	yes		yes	no	 	yes		57981
+368_Plymouth_St. 	TownHouse	1986		44446		5	6.5	350		yes	yes		no	yes		yes		369872	
+Zion,_IL_60099		Victorian	1988		54885		4	5.5	440		yes	no		yes	yes		yes		989223
+463_West_Young_Street 	Apartment	1990		54565		9	10	520		yes	no		no 	no		yes		454555
+Groton,_CT_06340	Bungalow	1992		55098		4	5	600		yes	yes		no	no	 	yes		545569
+7540_Sunset_Street 	Business	1994		48785		10	12	1200		no	yes		yes	no 		no		565685	
+Little_Falls,_NJ_07424	Cape_Cod	1996		62837		8	10	1900		no	yes		yes	yes		no		741235	
+41_Manhattan_Drive 	Colonial	1998		66706		8	9	900		yes	no		no	yes		yes		789542			
+Copperas_Cove,_TX_76522	Commercial	2000		70575		50	60	1033		no 	no		yes	no		yes		963852	
+74_Beach_Rd. 		Condo		2002		7444		20	26.5	1190		yes	yes		no 	no	 	no		74152	
+Hopewell_Junction,_NY	Ranch		2004		78314		15	20.5	1278		yes	yes		no	no	 	yes		369875
+70_Oak_Valley_St. 	TownHouse	2006		82184		12	13	1500		yes	yes		yes	yes		yes		13387								
+Nicholasville,_KY_40356	Victorian	2008		86053		2	2	29005		yes	no		yes	yes		yes		47893
+357_Augusta_Dr. 	Apartment	2010		60789		2	2.5	7413		yes	no		no	no		yes		74123	
+Chardon,_OH_44024	Bungalow	2012		13050		3	3	5651		no	yes		yes	no	 	yes		963545			
+35_Southampton_Dr. 	Business	2014		97665		38	40	4654		no	yes		no 	no	 	yes		324589
+Powhatan,_VA_23139	Cape_Cod	2016		40874		4	5	555		yes	yes		no	yes		no		321696
+75_Summit_St.  Apartment 1970 18000 1 1.0 400.0 true true true true 0.0 
+123_Example Apartment 2018 20000 4 4.0 30.0 false true true true false 3342000.0 
