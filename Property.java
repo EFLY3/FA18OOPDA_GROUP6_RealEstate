@@ -1,27 +1,14 @@
 
 /**
- *	abstract class Property
- *		String address
- *		String propertyType
- *		int built
- *		int squareFoot
- *		int numRooms
- *		double numBath
- *		double backyard
- *		boolean rentZoning
- *		boolean has_secSystem
- *		boolean has_pool
- *		boolean has_fireplace
- *		boolean has_garage
- *		double value
- *
  *	The parent class of all properties listed in Acme Realty.
- *	created 10/16/18 - R. Erskine
- *	edited 11/15/18 - R.Erskine
+ *	@version 2018.10.16
+ *	@author R.Erskine 	
+ *	-Edited 11/15/18 - R.Erskine
+ *	-Edited 11/28/18 - R.Erskine
+ *	-Edited 11/29/18 - D.Pimentel
  */
-public class Property implements Rentable
-{
-
+public class Property implements Rentable{
+	
 	//property Strings
 	protected String address;
 	protected String propertyType;
@@ -30,7 +17,6 @@ public class Property implements Rentable
 	protected int builtIn;
 	protected int squareFoot;
 	protected int numRooms;
-	protected int numFloors;
 	protected double numBath;
 	protected double backyard;
 	
@@ -55,7 +41,6 @@ public class Property implements Rentable
 		builtIn = 0;
 		squareFoot = 0;
 		numRooms = 0;
-		numFloors = 0;
 		numBath = 0.0;
 		backyard = 0.0;
 		
@@ -71,7 +56,7 @@ public class Property implements Rentable
 	}
 	
 	//all input constructor
-	public Property(String add, String type, int built, int foot, int room, double bath, int floor, double yard,
+	public Property(String add, String type, int built, int foot, int room, double bath, double yard,
 					boolean zone, boolean sec, boolean pool, boolean fire, boolean gara)
 	{
 		address = add;
@@ -80,7 +65,6 @@ public class Property implements Rentable
 		builtIn = built;
 		squareFoot = foot;
 		numRooms = room;
-		numFloors = floor;
 		numBath = bath;
 		backyard = yard;
 		
@@ -95,26 +79,15 @@ public class Property implements Rentable
 		value = 0.0;
 	}
 	
-	public boolean getPurchased()
-	{
+	// Getters and setters
+	public boolean getPurchased(){
 		return purchased;
 	}
 	
-	public void setPurchased(boolean pur)
-	{
+	public void setPurchased(boolean pur){
 		purchased = pur;
 	}
 	
-	public int getFloors()
-	{
-		return numFloors;
-	}
-	
-	public void setFloors(int floor)
-	{
-		numFloors = floor;
-	}
-
 	public boolean isHas_garage() {
 		return has_garage;
 	}
@@ -220,31 +193,56 @@ public class Property implements Rentable
 		this.has_secSystem = has_secSystem;
 	}
 
-	//rentable defined - if the zone allows renting and the property is atleast 1000 sqft 
-	// then the property is rentable
-	public boolean rentable()
-	{
+	/**
+	 * Rentable defined - if the zone allows renting and the property is at least 1000 sqft,
+	 * then the property is rentable
+	 */
+	public boolean rentable(){
 		if(rentZoning == true && this.squareFoot>1000)
 		{
 			return true;
 		}
-		
 		return false;
 	}
+	
 	//basic toString
 	@Override
 	public String toString() 
 	{
-		return "" + address + "\n" + propertyType + "\n" + builtIn + "\n" + squareFoot + "\n"
-				+ numRooms + "\n" + numBath + "\n" + backyard + "\n" + rentZoning + "\n" + has_secSystem + "\n" 
-				+ has_pool + "\n" + has_fireplace + "\n" + value + "\n";
+		return "" + "Address: "				+ address + "\n" +
+					"Property Type: " 	+ propertyType + "\n" +
+					"Built In: " 		+ builtIn + "\n" +
+					"Property Size(sqft): " + squareFoot + "\n" +
+					"Rooms: " 		+ numRooms + "\n" +
+					"Bathrooms: " 		+ numBath + "\n" +
+					"Backyard size: " 	+ backyard + "\n" +
+					"Rent Zoning: " 	+ rentZoning + "\n" +
+					"Security System: " 	+ has_secSystem + "\n" +
+					"Pool: " 		+ has_pool + "\n" +
+					"Fireplace: " 		+ has_fireplace + "\n" +
+					"Garage: " 		+ has_garage + "\n" +
+					"Price: " 		+ value + "\n";	
 	}
 	
-	public String propWrite()
-	{
+	public String propWrite(){
 		return "" + address + " " + propertyType + " " + builtIn + " " + squareFoot + " "
 				+ numRooms + " " + numBath + " " + backyard + " " + rentZoning + " " + has_secSystem + " " 
-				+ has_pool + " " + has_fireplace + " " + value + " ";
+				+ has_pool + " " + has_fireplace + " " + has_garage + " " + value + " ";
 	}
-
+	
+	public void printProp(){
+		System.out.println(
+				"Address: "			+ address + "\n" +
+				"Property Type: " 		+ propertyType + "\n" +
+				"Built In: " 			+ builtIn + "\n" +
+				"Property Size(sqft): " 	+ squareFoot + "\n" +
+				"Rooms: " 			+ numRooms + "\n" +
+				"Bathrooms: " 			+ numBath + "\n" +
+				"Backyard size: " 		+ address + "\n" +
+				"Rent Zoning: " 		+ address + "\n" +
+				"Security System: " 		+ address + "\n" +
+				"Pool: " 			+ address + "\n" +
+				"Fireplace: " 			+ has_fireplace + "\n" +
+				"Garage: " 			+ has_garage + "\n");
+	}
 }
